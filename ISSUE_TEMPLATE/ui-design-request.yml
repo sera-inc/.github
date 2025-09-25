@@ -1,44 +1,150 @@
-name: 🎨 UI/UXデザイン依頼
-description: デザイン作成・修正の依頼
-title: "[デザイン] "
-labels: ["design", "ui/ux"]
-projects: ["sera-inc/1"]
+name: 🚀 機能要件
+description: 新機能・改修要件の定義
+title: "[要件] "
+labels: ["requirement", "feature"]
+assignees: []
 body:
-  - type: dropdown
-    id: design-type
+  - type: markdown
     attributes:
-      label: 🎯 デザイン種別
+      value: |
+        ## 📋 機能要件テンプレート
+        統合型プロジェクト管理のための標準化された機能要件定義フォームです。
+        
+  - type: input
+    id: function-name
+    attributes:
+      label: 📝 機能名
+      placeholder: "例: ユーザー認証機能の実装"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🔥 優先度
+      description: ビジネス影響度に基づく優先度
       options:
-        - "新規画面設計"
-        - "既存画面改修"
-        - "コンポーネント設計"
-        - "ユーザーフロー設計"
-        - "プロトタイプ作成"
+        - "🔥 Critical"
+        - "🔴 High" 
+        - "🟡 Medium"
+        - "🔵 Low"
+        - "⚪ TBD"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🏗️ コンポーネント
+      description: 影響するシステム領域
+      options:
+        - "Frontend"
+        - "Backend"
+        - "Database" 
+        - "Infrastructure"
+        - "UI/UX"
+        - "Security"
+        - "Documentation"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: story-points
+    attributes:
+      label: ⚡ ストーリーポイント
+      description: 実装複雑度の見積もり
+      options:
+        - "1"
+        - "2" 
+        - "3"
+        - "5"
+        - "8"
+        - "13"
+        - "21"
+        - "34"
+      
+  - type: dropdown
+    id: client-priority
+    attributes:
+      label: 👔 クライアント優先度
+      description: MoSCoW法による分類
+      options:
+        - "Must Have"
+        - "Should Have"
+        - "Could Have" 
+        - "Won't Have"
     validations:
       required: true
       
   - type: input
-    id: target-screens
+    id: figma-link
     attributes:
-      label: 🖥️ 対象画面・機能
-      placeholder: "ログイン画面、ダッシュボード等"
+      label: 🎨 Figmaリンク
+      placeholder: "https://figma.com/file/..."
+      description: "UI/UX関連の場合は必須"
+      
+  - type: input
+    id: estimated-hours
+    attributes:
+      label: ⏱️ 見積工数
+      placeholder: "16"
+      description: "時間単位での見積もり"
+      
+  - type: input
+    id: delivery-date
+    attributes:
+      label: 📅 希望納期
+      placeholder: "2024-12-31"
+      description: "YYYY-MM-DD形式"
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: 📖 機能詳細説明
+      placeholder: |
+        ## 背景・目的
+        なぜこの機能が必要なのか
+        
+        ## 機能概要
+        どのような機能なのか
+        
+        ## 実装要件
+        - 技術的な要求事項
+        - パフォーマンス要件
+        - セキュリティ要件
+      value: |
+        ## 背景・目的
+        
+        ## 機能概要
+        
+        ## 実装要件
     validations:
       required: true
       
   - type: textarea
-    id: design-requirements
+    id: acceptance-criteria
     attributes:
-      label: 📋 デザイン要件
+      label: ✅ 受け入れ基準
       placeholder: |
-        - ブランドガイドライン準拠
-        - レスポンシブ対応
-        - アクセシビリティ要件
-        - 使用デバイス・ブラウザ
+        - [ ] 条件1が満たされている
+        - [ ] 条件2が満たされている
+        - [ ] テストが通過している
+      description: "この機能が完了したと判断する基準"
     validations:
       required: true
       
-  - type: input
-    id: reference-designs
+  - type: textarea
+    id: security-considerations
     attributes:
-      label: 🔗 参考デザイン・URL
-      placeholder: "参考となるサイトやデザインのURL"
+      label: 🛡️ セキュリティ考慮事項
+      placeholder: |
+        - 認証・認可要件
+        - データ保護要件
+        - 脆弱性対策
+      description: "セキュリティ関連の考慮事項"
+      
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: 📝 追加情報
+      placeholder: "その他の特記事項、制約、参考資料など"
