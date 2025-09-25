@@ -1,0 +1,177 @@
+name: 変更要求
+description: 仕様変更・機能追加の要求管理テンプレート
+title: "[変更要求] "
+labels: ["change-request", "needs-review"]
+projects: ["sera-inc/1"]
+assignees:
+  - 
+body:
+  - type: input
+    id: request-title
+    attributes:
+      label: 変更要求件名
+      description: 変更要求の概要
+      placeholder: "例: ログイン画面のパスワード要件変更"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: change-reason
+    attributes:
+      label: 変更理由・背景
+      description: なぜこの変更が必要なのか詳細を記載
+      placeholder: |
+        ・ユーザビリティの向上のため
+        ・セキュリティ強化のため
+        ・法的要件への対応のため
+        ・パフォーマンス改善のため
+    validations:
+      required: true
+      
+  - type: textarea
+    id: current-spec
+    attributes:
+      label: 現在の仕様
+      description: 変更前の現在の仕様・動作
+      placeholder: "現在の機能・画面・処理内容を詳細に記載"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: requested-spec
+    attributes:
+      label: 要求仕様
+      description: 変更後の希望仕様・動作
+      placeholder: "変更後の機能・画面・処理内容を詳細に記載"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: 変更種別
+      description: 変更の種類を選択
+      options:
+        - 機能追加
+        - 仕様変更
+        - 画面変更
+        - データ構造変更
+        - インフラ変更
+        - セキュリティ対応
+        - パフォーマンス改善
+        - バグ修正
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      description: 変更要求の緊急度・重要度
+      options:
+        - "緊急（即座に対応が必要）"
+        - "高（今スプリント内で対応）"
+        - "中（次スプリントで対応）"
+        - "低（リリース後でも可）"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: impact-analysis
+    attributes:
+      label: 影響範囲分析
+      description: 技術的影響度を詳細に記載
+      placeholder: |
+        ■ 影響を受けるモジュール・機能
+        - フロントエンド：ログイン画面、ユーザー情報画面
+        - バックエンド：認証API、ユーザー管理API
+        - データベース：ユーザーテーブル
+        
+        ■ 影響を受ける画面・処理
+        - ログイン処理
+        - パスワード変更処理
+        - 新規登録処理
+    validations:
+      required: true
+      
+  - type: input
+    id: estimated-hours
+    attributes:
+      label: 想定工数（時間）
+      description: 実装に要する想定工数
+      placeholder: "例: 8時間、16時間、40時間"
+    validations:
+      required: true
+      
+  - type: input
+    id: schedule-impact
+    attributes:
+      label: スケジュール影響
+      description: リリース予定への影響
+      placeholder: "例: 2日遅延、影響なし、1週間前倒し必要"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: cost-impact
+    attributes:
+      label: コスト影響度
+      description: 追加コストの発生度合い
+      options:
+        - "影響なし（既存予算内）"
+        - "軽微（10%未満の増加）"
+        - "中程度（10-30%の増加）"
+        - "大（30%以上の増加）"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: risk-assessment
+    attributes:
+      label: リスク影響度
+      description: 変更によるリスク・懸念事項
+      placeholder: |
+        ■ 技術的リスク
+        - 既存機能への影響
+        - データ整合性の問題
+        
+        ■ スケジュールリスク
+        - 他機能開発への影響
+        - テスト期間の調整
+        
+        ■ 品質リスク
+        - 十分なテスト実施の可否
+        - リグレッション発生リスク
+    validations:
+      required: true
+      
+  - type: input
+    id: deadline
+    attributes:
+      label: 希望完了日
+      description: この変更をいつまでに完了したいか
+      placeholder: "YYYY/MM/DD"
+      
+  - type: dropdown
+    id: approval-status
+    attributes:
+      label: 承認ステータス
+      description: 承認プロセスの状態
+      options:
+        - "承認待ち"
+        - "PM承認済み"
+        - "クライアント承認済み"
+        - "却下"
+        - "保留"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: 補足事項
+      description: その他の重要な情報
+      placeholder: |
+        - 関連する要求・機能
+        - 参考資料・URL
+        - ステークホルダーからのコメント

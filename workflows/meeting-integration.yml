@@ -1,0 +1,320 @@
+name: 会議議事録
+on:
+  repository_dispatch:
+    types: [meeting-completed]
+  workflow_dispatch:
+    inputs:
+      meeting_url:
+        description: 'tl;dv meeting URL'
+        required: true
+        type: string
+      meeting_title:
+        description: 'Meeting Title'
+        required: true
+        type: string
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: write
+  discussions: write
+
+jobs:
+  process-meeting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: |
+          npm install @octokit/rest openai moment
+          
+      - name: Process Meeting Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TLDV_API_KEY: ${{ secrets.TLDV_API_KEY }}
+          MEETING_URL: ${{ github.event.inputs.meeting_url || github.event.client_payload.meeting_url }}
+          MEETING_TITLE: ${{ github.event.inputs.meeting_title || github.event.client_payload.meeting_title }}
+        run: |
+          node << 'EOF'
+          const { Octokit } = require("@octokit/rest");
+          const OpenAI = require('openai');
+          const moment = require('moment');
+          
+          const octokit = new Octokit({
+            auth: process.env.GITHUB_TOKEN,
+          });
+          
+          const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+          });
+          
+          async function processMeeting() {
+            console.log('🎤 会議議事録処理開始');
+            
+            const meetingUrl = process.env.MEETING_URL;
+            const meetingTitle = process.env.MEETING_TITLE || 'プロジェクト会議';
+            const meetingDate = moment().format('YYYY-MM-DD');
+            
+            // tl;dv APIから音声議事録取得（仮実装）
+            let transcriptText = '';
+            if (process.env.TLDV_API_KEY) {
+              try {
+                // 実際のtl;dv API実装はここに
+                console.log('📝 tl;dv APIから議事録取得中...');
+                transcriptText = await fetchTldvTranscript(meetingUrl);
+              } catch (error) {
+                console.error('❌ tl;dv API取得エラー:', error);
+                transcriptText = `議事録の自動取得に失敗しました。
+手動で議事録を追加してください。
+
+会議URL: ${meetingUrl}
+会議日時: ${meetingDate}
+会議タイトル: ${meetingTitle}`;
+              }
+            } else {
+              console.log('⚠️ tl;dv APIキーが設定されていません');
+              transcriptText = 'tl;dv APIキーが未設定のため、議事録の自動取得をスキップしました。';
+            }
+            
+            // OpenAI による議事録分析・要約
+            let analysis = null;
+            if (process.env.OPENAI_API_KEY && transcriptText) {
+              try {
+                console.log('🤖 AI議事録分析中...');
+                analysis = await analyzeTranscript(transcriptText, meetingTitle);
+              } catch (error) {
+                console.error('❌ AI分析エラー:', error);
+              }
+            }
+            
+            // GitHub Discussions に議事録投稿
+            await createMeetingDiscussion(meetingTitle, meetingDate, transcriptText, analysis, meetingUrl);
+            
+            // 決定事項からGitHub Issue作成
+            if (analysis && analysis.actionItems && analysis.actionItems.length > 0) {
+              await createActionItemIssues(analysis.actionItems, meetingDate);
+            }
+            
+            // Figma更新指示の処理
+            if (analysis && analysis.figmaUpdates && analysis.figmaUpdates.length > 0) {
+              await createFigmaUpdateIssues(analysis.figmaUpdates, meetingDate);
+            }
+            
+            console.log('✅ 会議議事録統合処理完了');
+          }
+          
+          async function fetchTldvTranscript(meetingUrl) {
+            // tl;dv API実装（実際のAPIエンドポイントに合わせて調整）
+            // これは仮実装です
+            return `会議の音声議事録がここに入ります。
+            
+実際の会議内容:
+- プロジェクト進捗の確認
+- 新機能の要件について討議
+- 次週のタスク割り当て確認
+- リスク事項の対応策検討`;
+          }
+          
+          async function analyzeTranscript(transcript, meetingTitle) {
+            const completion = await openai.chat.completions.create({
+              model: "gpt-4",
+              messages: [
+                {
+                  role: "system",
+                  content: `あなたはプロジェクト管理の専門家です。会議の議事録を分析し、以下の項目を抽出してください：
+
+1. 決定事項（具体的な決定内容）
+2. アクションアイテム（担当者、期限、具体的なタスク）
+3. リスク・課題（発生している問題や懸念事項）
+4. Figma更新指示（UI/UXデザインに関する変更要求）
+5. 次回会議までの宿題
+
+JSON形式で回答してください。`
+                },
+                {
+                  role: "user",
+                  content: `会議タイトル: ${meetingTitle}
+議事録内容:
+${transcript}`
+                }
+              ],
+              temperature: 0.3,
+            });
+            
+            try {
+              return JSON.parse(completion.choices[0].message.content);
+            } catch (error) {
+              console.error('AI分析結果のJSON解析エラー:', error);
+              return {
+                decisions: [],
+                actionItems: [],
+                risks: [],
+                figmaUpdates: [],
+                homework: []
+              };
+            }
+          }
+          
+          async function createMeetingDiscussion(title, date, transcript, analysis, meetingUrl) {
+            const owner = process.env.GITHUB_REPOSITORY.split('/')[0];
+            const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
+            
+            let body = `# 📅 ${title} - ${date}
+
+## 🔗 会議情報
+- **日時**: ${date}
+- **会議URL**: ${meetingUrl || 'N/A'}
+
+## 📝 議事録
+${transcript}
+`;
+            
+            if (analysis) {
+              body += `
+## 🎯 決定事項
+${analysis.decisions ? analysis.decisions.map(d => `- ${d}`).join('\n') : '決定事項なし'}
+
+## ⚡ アクションアイテム  
+${analysis.actionItems ? analysis.actionItems.map(a => `- **${a.assignee || '未指定'}**: ${a.task} (期限: ${a.deadline || '未設定'})`).join('\n') : 'アクションアイテムなし'}
+
+## ⚠️ リスク・課題
+${analysis.risks ? analysis.risks.map(r => `- ${r}`).join('\n') : 'リスク・課題なし'}
+
+## 🎨 Figma更新指示
+${analysis.figmaUpdates ? analysis.figmaUpdates.map(f => `- ${f}`).join('\n') : 'Figma更新指示なし'}
+
+## 📋 次回までの宿題
+${analysis.homework ? analysis.homework.map(h => `- ${h}`).join('\n') : '宿題なし'}
+`;
+            }
+            
+            body += `
+---
+*自動生成日時: ${moment().format('YYYY-MM-DD HH:mm:ss')}*
+`;
+            
+            try {
+              const { data: discussion } = await octokit.rest.teams.createDiscussionInOrg({
+                org: owner,
+                team_slug: 'project-team',
+                title: `📅 ${title} - ${date}`,
+                body: body
+              });
+              
+              console.log(`📝 議事録Discussion作成完了: ${discussion.html_url}`);
+            } catch (error) {
+              console.error('❌ Discussion作成エラー:', error);
+              
+              // Fallback: Issue として作成
+              await octokit.rest.issues.create({
+                owner,
+                repo,
+                title: `📅 会議議事録: ${title} - ${date}`,
+                body: body,
+                labels: ['meeting-minutes', 'documentation']
+              });
+            }
+          }
+          
+          async function createActionItemIssues(actionItems, meetingDate) {
+            const owner = process.env.GITHUB_REPOSITORY.split('/')[0];
+            const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
+            
+            for (const item of actionItems) {
+              try {
+                const { data: issue } = await octokit.rest.issues.create({
+                  owner,
+                  repo,
+                  title: `[アクション] ${item.task}`,
+                  body: `## 📋 アクションアイテム詳細
+
+**タスク**: ${item.task}
+**担当者**: ${item.assignee || '未指定'}
+**期限**: ${item.deadline || '未設定'}
+**会議日**: ${meetingDate}
+
+## 📝 背景・詳細
+${item.description || 'N/A'}
+
+---
+*${meetingDate}の会議で決定されたアクションアイテムです*`,
+                  labels: ['action-item', 'from-meeting'],
+                  assignees: item.assignee ? [item.assignee] : []
+                });
+                
+                console.log(`⚡ アクションアイテムIssue作成: ${issue.html_url}`);
+              } catch (error) {
+                console.error('❌ アクションアイテムIssue作成エラー:', error);
+              }
+            }
+          }
+          
+          async function createFigmaUpdateIssues(figmaUpdates, meetingDate) {
+            const owner = process.env.GITHUB_REPOSITORY.split('/')[0];
+            const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
+            
+            for (const update of figmaUpdates) {
+              try {
+                const { data: issue } = await octokit.rest.issues.create({
+                  owner,
+                  repo,
+                  title: `[Figma] ${update.title || 'デザイン更新要求'}`,
+                  body: `## 🎨 Figmaデザイン更新要求
+
+**更新内容**: ${update.description || update}
+**会議日**: ${meetingDate}
+
+## 📋 タスク詳細
+- [ ] Figmaデザインの更新実施
+- [ ] デザインシステムの調整
+- [ ] 関連コンポーネントの確認
+- [ ] 開発チームへの共有
+
+## 🔗 関連リンク
+- Figma URL: [更新後に追記]
+
+---
+*${meetingDate}の会議で決定されたデザイン更新要求です*`,
+                  labels: ['figma', 'design', 'from-meeting', 'ui-ux']
+                });
+                
+                console.log(`🎨 FigmaUpdateIssue作成: ${issue.html_url}`);
+              } catch (error) {
+                console.error('❌ FigmaUpdateIssue作成エラー:', error);
+              }
+            }
+          }
+          
+          processMeeting().catch(console.error);
+          EOF
+          
+      - name: Notify Team
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MEETING_TITLE: ${{ github.event.inputs.meeting_title || github.event.client_payload.meeting_title }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK_URL" ]; then
+            curl -X POST -H 'Content-type: application/json' \
+              --data "{\"text\":\"📅 会議議事録が処理されました: **${MEETING_TITLE}**\n🔗 <${{ github.server_url }}/${{ github.repository }}/discussions|DiscussionsでAIサマリーを確認> \n⚡ 新しいアクションアイテムがIssueとして作成されました\"}" \
+              $SLACK_WEBHOOK_URL
+          fi
+          
+      - name: Update Meeting Tracker
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 会議トラッカーファイルの更新
+          echo "$(date '+%Y-%m-%d'): ${{ github.event.inputs.meeting_title || github.event.client_payload.meeting_title }}" >> meetings.log
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add meetings.log
+          git commit -m "📅 会議記録更新: ${{ github.event.inputs.meeting_title || github.event.client_payload.meeting_title }}" || exit 0
+          git push
