@@ -62,7 +62,6 @@ body:
         - "13"
         - "21"
         - "34"
-      default: 0
       
   - type: dropdown
     id: client-priority
