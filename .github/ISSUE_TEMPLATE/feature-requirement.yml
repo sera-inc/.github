@@ -1,0 +1,153 @@
+# .github/ISSUE_TEMPLATE/feature-requirement.yml
+name: 🚀 機能要件
+description: 新機能・改修要件の定義
+title: "[要件] "
+labels: ["requirement", "feature"]
+projects: ["sera-inc/1"]  # 組織のプロジェクト番号
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📋 機能要件テンプレート
+        統合型プロジェクト管理のための標準化された機能要件定義フォームです。
+        
+  - type: input
+    id: function-name
+    attributes:
+      label: 📝 機能名
+      placeholder: "例: ユーザー認証機能の実装"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🔥 優先度
+      description: ビジネス影響度に基づく優先度
+      options:
+        - "🔥 Critical"
+        - "🔴 High" 
+        - "🟡 Medium"
+        - "🔵 Low"
+        - "⚪ TBD"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🏗️ コンポーネント
+      description: 影響するシステム領域
+      options:
+        - "Frontend"
+        - "Backend"
+        - "Database" 
+        - "Infrastructure"
+        - "UI/UX"
+        - "Security"
+        - "Documentation"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: story-points
+    attributes:
+      label: ⚡ ストーリーポイント
+      description: 実装複雑度の見積もり
+      options:
+        - "1"
+        - "2" 
+        - "3"
+        - "5"
+        - "8"
+        - "13"
+        - "21"
+        - "34"
+      default: 0
+      
+  - type: dropdown
+    id: client-priority
+    attributes:
+      label: 👔 クライアント優先度
+      description: MoSCoW法による分類
+      options:
+        - "Must Have"
+        - "Should Have"
+        - "Could Have" 
+        - "Won't Have"
+    validations:
+      required: true
+      
+  - type: input
+    id: figma-link
+    attributes:
+      label: 🎨 Figmaリンク
+      placeholder: "https://figma.com/file/..."
+      description: "UI/UX関連の場合は必須"
+      
+  - type: input
+    id: estimated-hours
+    attributes:
+      label: ⏱️ 見積工数
+      placeholder: "16"
+      description: "時間単位での見積もり"
+      
+  - type: input
+    id: delivery-date
+    attributes:
+      label: 📅 希望納期
+      placeholder: "2024-12-31"
+      description: "YYYY-MM-DD形式"
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: 📖 機能詳細説明
+      placeholder: |
+        ## 背景・目的
+        なぜこの機能が必要なのか
+        
+        ## 機能概要
+        どのような機能なのか
+        
+        ## 実装要件
+        - 技術的な要求事項
+        - パフォーマンス要件
+        - セキュリティ要件
+      value: |
+        ## 背景・目的
+        
+        ## 機能概要
+        
+        ## 実装要件
+    validations:
+      required: true
+      
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: ✅ 受け入れ基準
+      placeholder: |
+        - [ ] 条件1が満たされている
+        - [ ] 条件2が満たされている
+        - [ ] テストが通過している
+      description: "この機能が完了したと判断する基準"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: security-considerations
+    attributes:
+      label: 🛡️ セキュリティ考慮事項
+      placeholder: |
+        - 認証・認可要件
+        - データ保護要件
+        - 脆弱性対策
+      description: "セキュリティ関連の考慮事項"
+      
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: 📝 追加情報
+      placeholder: "その他の特記事項、制約、参考資料など"

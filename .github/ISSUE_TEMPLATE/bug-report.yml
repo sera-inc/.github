@@ -1,0 +1,68 @@
+# .github/ISSUE_TEMPLATE/bug-report.yml
+name: 🐛 バグレポート
+description: 不具合の報告
+title: "[バグ] "
+labels: ["bug", "needs-triage"]
+projects: ["sera-inc/1"]
+body:
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 重要度
+      options:
+        - "🔥 Critical - システム停止"
+        - "🔴 High - 主要機能影響"
+        - "🟡 Medium - 一部機能影響" 
+        - "🔵 Low - 軽微な問題"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🏗️ 影響箇所
+      options:
+        - "Frontend"
+        - "Backend"
+        - "Database"
+        - "Infrastructure"
+        - "Security"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 📖 バグの説明
+      placeholder: "何が起きているかを具体的に記載"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 🔄 再現手順
+      placeholder: |
+        1. ...にアクセス
+        2. ...をクリック
+        3. ...を入力
+        4. エラー発生
+    validations:
+      required: true
+      
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: ✅ 期待する動作
+      placeholder: "本来はどうなるべきか"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🖥️ 環境情報
+      placeholder: |
+        - OS: Windows 11
+        - ブラウザ: Chrome 120
+        - 画面サイズ: 1920x1080

@@ -1,0 +1,45 @@
+# .github/ISSUE_TEMPLATE/ui-design-request.yml
+name: 🎨 UI/UXデザイン依頼
+description: デザイン作成・修正の依頼
+title: "[デザイン] "
+labels: ["design", "ui/ux"]
+projects: ["sera-inc/1"]
+body:
+  - type: dropdown
+    id: design-type
+    attributes:
+      label: 🎯 デザイン種別
+      options:
+        - "新規画面設計"
+        - "既存画面改修"
+        - "コンポーネント設計"
+        - "ユーザーフロー設計"
+        - "プロトタイプ作成"
+    validations:
+      required: true
+      
+  - type: input
+    id: target-screens
+    attributes:
+      label: 🖥️ 対象画面・機能
+      placeholder: "ログイン画面、ダッシュボード等"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: design-requirements
+    attributes:
+      label: 📋 デザイン要件
+      placeholder: |
+        - ブランドガイドライン準拠
+        - レスポンシブ対応
+        - アクセシビリティ要件
+        - 使用デバイス・ブラウザ
+    validations:
+      required: true
+      
+  - type: input
+    id: reference-designs
+    attributes:
+      label: 🔗 参考デザイン・URL
+      placeholder: "参考となるサイトやデザインのURL"
