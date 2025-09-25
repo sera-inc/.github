@@ -1,9 +1,7 @@
-# .github/ISSUE_TEMPLATE/feature-requirement.yml
 name: 🚀 機能要件
 description: 新機能・改修要件の定義
 title: "[要件] "
 labels: ["requirement", "feature"]
-projects: ["sera-inc/1"]  # 組織のプロジェクト番号
 assignees: []
 body:
   - type: markdown
