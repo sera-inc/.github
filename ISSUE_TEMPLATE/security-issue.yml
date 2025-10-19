@@ -1,0 +1,148 @@
+name: 🔒 セキュリティ問題
+description: セキュリティ脆弱性の報告（非公開）
+title: "[セキュリティ] "
+labels: ["security", "needs-triage", "confidential"]
+projects: ["sera-inc/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ セキュリティ問題報告フォーム
+        
+        **重要**: このフォームはセキュリティ脆弱性の報告専用です。
+        報告された情報は機密として扱われ、修正が完了するまで非公開とします。
+        
+        一般的なバグ報告は「🐛 バグレポート」テンプレートをご使用ください。
+        
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 深刻度
+      description: セキュリティ脆弱性の深刻度
+      options:
+        - "🔴 Critical - 即座の対応が必要"
+        - "🟠 High - 早急な対応が必要"
+        - "🟡 Medium - 計画的な対応が必要"
+        - "🔵 Low - 軽微なセキュリティ問題"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: vulnerability-type
+    attributes:
+      label: 🔍 脆弱性の種類
+      description: 該当する脆弱性の種類を選択
+      options:
+        - "認証・認可の問題"
+        - "SQLインジェクション"
+        - "クロスサイトスクリプティング (XSS)"
+        - "クロスサイトリクエストフォージェリ (CSRF)"
+        - "機密情報の露出"
+        - "安全でない暗号化"
+        - "依存関係の脆弱性"
+        - "権限昇格"
+        - "サービス拒否 (DoS)"
+        - "その他"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🏗️ 影響箇所
+      description: 脆弱性が存在するコンポーネント
+      options:
+        - "Frontend"
+        - "Backend"
+        - "Database"
+        - "Infrastructure"
+        - "API"
+        - "認証システム"
+        - "複数のコンポーネント"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: vulnerability-description
+    attributes:
+      label: 📖 脆弱性の説明
+      description: 発見した脆弱性の詳細を記載してください
+      placeholder: |
+        - 何が問題なのか
+        - どのような影響があるか
+        - どのように発見したか
+    validations:
+      required: true
+      
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: 🔄 再現手順
+      description: 脆弱性を再現する手順（可能な範囲で）
+      placeholder: |
+        1. ...にアクセス
+        2. ...を実行
+        3. ...が発生
+        
+        **注意**: 実際の攻撃を行わないでください
+    validations:
+      required: true
+      
+  - type: textarea
+    id: impact-analysis
+    attributes:
+      label: 💥 影響範囲
+      description: この脆弱性による潜在的な影響
+      placeholder: |
+        - データ漏洩のリスク
+        - システムへの不正アクセス
+        - サービス停止の可能性
+        - 影響を受けるユーザー数
+    validations:
+      required: true
+      
+  - type: textarea
+    id: affected-versions
+    attributes:
+      label: 📦 影響を受けるバージョン
+      description: 脆弱性が存在するバージョン
+      placeholder: |
+        - v1.0.0 - v1.2.3
+        - 本番環境: v1.2.0
+        - ステージング環境: v1.3.0-beta
+    validations:
+      required: true
+      
+  - type: textarea
+    id: mitigation-suggestions
+    attributes:
+      label: 🛡️ 緩和策・修正案
+      description: 可能であれば、修正方法や緩和策の提案
+      placeholder: |
+        - 一時的な緩和策
+        - 推奨される修正方法
+        - 参考となる資料やCVE番号
+        
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🖥️ 環境情報
+      description: 脆弱性を確認した環境
+      placeholder: |
+        - 環境: 本番/ステージング/開発
+        - OS: 
+        - ブラウザ: 
+        - その他関連情報:
+    validations:
+      required: true
+      
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 追加情報
+      description: その他の関連情報
+      placeholder: |
+        - 関連するセキュリティアドバイザリ
+        - CVE番号
+        - 参考URL
+        - スクリーンショット（機密情報を含まないもの）
