@@ -24,8 +24,13 @@ case "$PROJECT_TYPE" in
         
         if [ -f "$TEMPLATE_DIR/python/pyproject.toml" ]; then
             cp "$TEMPLATE_DIR/python/pyproject.toml" pyproject.toml
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" pyproject.toml
-            sed -i "s/PROJECT_DESCRIPTION/A Python project/g" pyproject.toml
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" pyproject.toml
+                sed -i '' "s/PROJECT_DESCRIPTION/A Python project/g" pyproject.toml
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" pyproject.toml
+                sed -i "s/PROJECT_DESCRIPTION/A Python project/g" pyproject.toml
+            fi
             echo "✅ Created pyproject.toml"
         fi
         
@@ -41,21 +46,35 @@ case "$PROJECT_TYPE" in
         
         if [ -f "$TEMPLATE_DIR/python/README.md" ]; then
             cp "$TEMPLATE_DIR/python/README.md" README.md
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" README.md
-            sed -i "s/PROJECT_DESCRIPTION/A Python project/g" README.md
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" README.md
+                sed -i '' "s/PROJECT_DESCRIPTION/A Python project/g" README.md
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" README.md
+                sed -i "s/PROJECT_DESCRIPTION/A Python project/g" README.md
+            fi
             echo "✅ Created README.md"
         fi
         
         if [ -f "$TEMPLATE_DIR/common/SECURITY.md" ]; then
             cp "$TEMPLATE_DIR/common/SECURITY.md" SECURITY.md
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" SECURITY.md
-            sed -i "s/\[SECURITY_EMAIL\]/security@example.com/g" SECURITY.md
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" SECURITY.md
+                sed -i '' "s/\[SECURITY_EMAIL\]/security@example.com/g" SECURITY.md
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" SECURITY.md
+                sed -i "s/\[SECURITY_EMAIL\]/security@example.com/g" SECURITY.md
+            fi
             echo "✅ Created SECURITY.md"
         fi
         
         if [ -f "$TEMPLATE_DIR/common/CONTRIBUTING.md" ]; then
             cp "$TEMPLATE_DIR/common/CONTRIBUTING.md" CONTRIBUTING.md
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" CONTRIBUTING.md
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" CONTRIBUTING.md
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" CONTRIBUTING.md
+            fi
             echo "✅ Created CONTRIBUTING.md"
         fi
         
@@ -73,8 +92,13 @@ case "$PROJECT_TYPE" in
         
         if [ -f "$TEMPLATE_DIR/typescript/package.json" ]; then
             cp "$TEMPLATE_DIR/typescript/package.json" package.json
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" package.json
-            sed -i "s/PROJECT_DESCRIPTION/A TypeScript project/g" package.json
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" package.json
+                sed -i '' "s/PROJECT_DESCRIPTION/A TypeScript project/g" package.json
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" package.json
+                sed -i "s/PROJECT_DESCRIPTION/A TypeScript project/g" package.json
+            fi
             echo "✅ Created package.json"
         fi
         
@@ -100,21 +124,35 @@ case "$PROJECT_TYPE" in
         
         if [ -f "$TEMPLATE_DIR/typescript/README.md" ]; then
             cp "$TEMPLATE_DIR/typescript/README.md" README.md
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" README.md
-            sed -i "s/PROJECT_DESCRIPTION/A TypeScript project/g" README.md
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" README.md
+                sed -i '' "s/PROJECT_DESCRIPTION/A TypeScript project/g" README.md
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" README.md
+                sed -i "s/PROJECT_DESCRIPTION/A TypeScript project/g" README.md
+            fi
             echo "✅ Created README.md"
         fi
         
         if [ -f "$TEMPLATE_DIR/common/SECURITY.md" ]; then
             cp "$TEMPLATE_DIR/common/SECURITY.md" SECURITY.md
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" SECURITY.md
-            sed -i "s/\[SECURITY_EMAIL\]/security@example.com/g" SECURITY.md
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" SECURITY.md
+                sed -i '' "s/\[SECURITY_EMAIL\]/security@example.com/g" SECURITY.md
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" SECURITY.md
+                sed -i "s/\[SECURITY_EMAIL\]/security@example.com/g" SECURITY.md
+            fi
             echo "✅ Created SECURITY.md"
         fi
         
         if [ -f "$TEMPLATE_DIR/common/CONTRIBUTING.md" ]; then
             cp "$TEMPLATE_DIR/common/CONTRIBUTING.md" CONTRIBUTING.md
-            sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" CONTRIBUTING.md
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/PROJECT_NAME/$PROJECT_NAME/g" CONTRIBUTING.md
+            else
+                sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" CONTRIBUTING.md
+            fi
             echo "✅ Created CONTRIBUTING.md"
         fi
         
