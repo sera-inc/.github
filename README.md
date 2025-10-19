@@ -6,8 +6,6 @@
 
 ### 新規プロジェクトの場合
 
-**📖 まず読む**: [新規プロジェクト作成手順.md](./新規プロジェクト作成手順.md) - GitHubでのリポジトリ作成から完全セットアップまでの詳細手順
-
 Sera Inc.の全標準規格を使用して新規プロジェクトを初期化:
 
 ```bash
@@ -22,9 +20,7 @@ cd .github
 ./setup-new-project.sh
 ```
 
-詳細な手順については以下を参照してください：
-- **[新規プロジェクト作成手順.md](./新規プロジェクト作成手順.md)** - 推奨：ステップバイステップガイド
-- [SETUP_GUIDE.md](./SETUP_GUIDE.md) - 包括的なセットアップガイド
+詳細な手順については[SETUP_GUIDE.md](./SETUP_GUIDE.md)を参照してください。
 
 ### 既存プロジェクトの場合
 
@@ -124,7 +120,6 @@ cd .github
 
 ## 📚 ドキュメント
 
-- **[新規プロジェクト作成手順.md](./新規プロジェクト作成手順.md)**: 🌟 推奨：GitHubリポジトリ作成から完全セットアップまでのステップバイステップガイド
 - **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**: 包括的なセットアップガイド
 - **[SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md)**: クイックセットアップ手順
 - **[github-projects-setup.md](./github-projects-setup.md)**: GitHubプロジェクト設定
