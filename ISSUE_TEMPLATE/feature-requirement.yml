@@ -2,6 +2,7 @@ name: 🚀 機能要件
 description: 新機能・改修要件の定義
 title: "[要件] "
 labels: ["requirement", "feature"]
+projects: ["sera-inc/1"]
 assignees: []
 body:
   - type: markdown
