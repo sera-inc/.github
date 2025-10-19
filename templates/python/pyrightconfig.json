@@ -1,0 +1,24 @@
+{
+  "include": ["src"],
+  "exclude": [
+    "**/__pycache__",
+    "**/.pytest_cache",
+    "**/node_modules",
+    "**/.venv",
+    "**/venv"
+  ],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "strict",
+  "reportMissingTypeStubs": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownVariableType": false,
+  "reportPrivateUsage": "warning",
+  "reportConstantRedefinition": "error",
+  "reportIncompatibleMethodOverride": "error",
+  "reportIncompatibleVariableOverride": "error",
+  "reportUnnecessaryIsInstance": "warning",
+  "reportUnnecessaryCast": "warning",
+  "reportUnnecessaryComparison": "warning",
+  "reportUnnecessaryContains": "warning"
+}

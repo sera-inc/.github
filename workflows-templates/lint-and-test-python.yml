@@ -1,0 +1,58 @@
+name: Lint and Test (Python)
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+      
+      - name: Set up Python
+        run: uv python install 3.11
+      
+      - name: Install dependencies
+        run: uv sync
+      
+      - name: Run formatter check
+        run: uv run ruff format --check .
+      
+      - name: Run linter
+        run: uv run ruff check .
+      
+      - name: Run type checker
+        run: uv run pyright
+      
+      - name: Run unit tests
+        run: uv run pytest tests/unit -v --cov=src --cov-report=xml --cov-report=term
+      
+      - name: Run integration tests
+        run: uv run pytest tests/integration -v --cov=src --cov-append --cov-report=xml --cov-report=term
+      
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      
+      - name: Check coverage thresholds
+        run: |
+          uv run coverage report --fail-under=80

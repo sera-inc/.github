@@ -1,0 +1,59 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  ENVIRONMENT: staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        if: env.AWS_REGION != ''
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      - name: Build and deploy
+        run: |
+          echo "🚀 Deploying to staging environment..."
+          echo "Add your deployment commands here"
+      
+      - name: Run E2E tests
+        run: |
+          echo "🧪 Running E2E tests..."
+          # Add E2E test commands here
+          # pnpm test:e2e or pytest tests/e2e
+      
+      - name: Run performance tests
+        run: |
+          echo "⚡ Running performance tests..."
+          # Add performance test commands here
+          # k6 run performance-tests.js
+      
+      - name: Notify deployment
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: |
+            Deployment to Staging: ${{ job.status }}
+            Commit: ${{ github.sha }}
+            Author: ${{ github.actor }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
