@@ -1,18 +1,18 @@
-# Sera Inc. Organization-Wide Configuration
+# Sera Inc. 組織全体の設定
 
-This repository contains organization-wide templates, workflows, and automation for all Sera Inc. projects.
+このリポジトリには、すべてのSera Inc.プロジェクトで使用する組織全体のテンプレート、ワークフロー、自動化が含まれています。
 
-## 🚀 Quick Start
+## 🚀 クイックスタート
 
-### For New Projects
+### 新規プロジェクトの場合
 
-Initialize a new project with all Sera Inc. standards:
+Sera Inc.の全標準規格を使用して新規プロジェクトを初期化:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/sera-inc/.github/main/setup-new-project.sh | bash
 ```
 
-Or clone and run locally:
+またはローカルでクローンして実行:
 
 ```bash
 git clone https://github.com/sera-inc/.github.git
@@ -20,196 +20,196 @@ cd .github
 ./setup-new-project.sh
 ```
 
-See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for detailed instructions.
+詳細な手順については[SETUP_GUIDE.md](./SETUP_GUIDE.md)を参照してください。
 
-### For Existing Projects
+### 既存プロジェクトの場合
 
-Apply individual setup scripts:
+個別のセットアップスクリプトを適用:
 
 ```bash
-# Project structure
+# プロジェクト構造
 ./setup/setup-project-structure.sh . python my-project
 
-# Development environment
+# 開発環境
 ./setup/setup-dev-environment.sh . python my-project
 
-# Git hooks
+# Gitフック
 ./setup/setup-git-hooks.sh . python
 
-# CI/CD workflows
+# CI/CDワークフロー
 ./setup/setup-ci-workflows.sh . python
 
-# GitHub labels
+# GitHubラベル
 ./setup/setup-labels.sh sera-inc my-repo ghp_xxxxx
 
 # GitHub Wiki
 ./setup/setup-wiki.sh my-repo
 
-# GitHub Projects
+# GitHubプロジェクト
 ./setup/setup-projects.sh sera-inc my-repo ghp_xxxxx "My Project"
 ```
 
-## 📁 Repository Structure
+## 📁 リポジトリ構造
 
 ```
 .github/
-├── setup-new-project.sh         # Master initialization script
-├── setup/                        # Individual setup scripts
-│   ├── setup-labels.sh          # GitHub labels
+├── setup-new-project.sh         # マスター初期化スクリプト
+├── setup/                        # 個別セットアップスクリプト
+│   ├── setup-labels.sh          # GitHubラベル
 │   ├── setup-wiki.sh            # GitHub Wiki
-│   ├── setup-projects.sh        # GitHub Projects
-│   ├── setup-ci-workflows.sh    # CI/CD workflows
-│   ├── setup-git-hooks.sh       # Git hooks
-│   ├── setup-project-structure.sh  # Project structure
-│   └── setup-dev-environment.sh    # Development environment
-├── templates/                    # Project templates
-│   ├── python/                  # Python project templates
-│   ├── typescript/              # TypeScript project templates
-│   └── common/                  # Common templates
-├── wiki-templates/               # Wiki page templates
-├── workflows-templates/          # CI/CD workflow templates
-├── ISSUE_TEMPLATE/              # Issue templates
-├── workflows/                    # Organization workflows
-├── pull_request_template.md     # PR template
-├── SETUP_GUIDE.md               # Detailed setup guide
-├── SETUP_INSTRUCTIONS.md        # Quick setup instructions
-└── github-projects-setup.md     # GitHub Projects guide
+│   ├── setup-projects.sh        # GitHubプロジェクト
+│   ├── setup-ci-workflows.sh    # CI/CDワークフロー
+│   ├── setup-git-hooks.sh       # Gitフック
+│   ├── setup-project-structure.sh  # プロジェクト構造
+│   └── setup-dev-environment.sh    # 開発環境
+├── templates/                    # プロジェクトテンプレート
+│   ├── python/                  # Pythonプロジェクトテンプレート
+│   ├── typescript/              # TypeScriptプロジェクトテンプレート
+│   └── common/                  # 共通テンプレート
+├── wiki-templates/               # Wikiページテンプレート
+├── workflows-templates/          # CI/CDワークフローテンプレート
+├── ISSUE_TEMPLATE/              # Issueテンプレート
+├── workflows/                    # 組織ワークフロー
+├── pull_request_template.md     # PRテンプレート
+├── SETUP_GUIDE.md               # 詳細セットアップガイド
+├── SETUP_INSTRUCTIONS.md        # クイックセットアップ手順
+└── github-projects-setup.md     # GitHubプロジェクトガイド
 ```
 
-## 🎯 What This Provides
+## 🎯 提供される機能
 
-### 1. Project Initialization System
+### 1. プロジェクト初期化システム
 
-Automatically sets up new projects with:
+以下を含む新規プロジェクトの自動セットアップ:
 
-- **Clean Architecture**: 4-layer structure (Domain, Use Case, Adapter, Infrastructure)
-- **Development Environment**: Configuration files for all tools
-- **Git Hooks**: Pre-commit quality checks
-- **CI/CD Workflows**: Automated testing, security scanning, deployment
-- **GitHub Integration**: Labels, Wiki, Projects
+- **クリーンアーキテクチャ**: 4層構造（Domain、Use Case、Adapter、Infrastructure）
+- **開発環境**: すべてのツールの設定ファイル
+- **Gitフック**: プリコミット品質チェック
+- **CI/CDワークフロー**: 自動テスト、セキュリティスキャン、デプロイメント
+- **GitHub統合**: ラベル、Wiki、プロジェクト
 
-### 2. Issue Templates
+### 2. Issueテンプレート
 
-Standardized templates for:
+以下の標準化されたテンプレート:
 
-- UI/UX Design Requests
-- Feature Requirements
-- Bug Reports
-- Change Requests
-- Security Issues
+- UI/UXデザインリクエスト
+- 機能要件
+- バグレポート
+- 変更リクエスト
+- セキュリティ問題
 
-### 3. Automated Workflows
+### 3. 自動化ワークフロー
 
-- **Weekly Reports**: Automated progress reports
-- **Meeting Integration**: AI-powered meeting minutes
-- **Auto-labeling**: Automatic PR labeling
-- **Dependency Review**: Security vulnerability scanning
-- **AI Summaries**: Automatic issue summaries
+- **週次レポート**: 自動進捗レポート
+- **ミーティング統合**: AI駆動のミーティング議事録
+- **自動ラベリング**: 自動PRラベル付け
+- **依存関係レビュー**: セキュリティ脆弱性スキャン
+- **AI要約**: 自動Issue要約
 
-### 4. Setup Scripts
+### 4. セットアップスクリプト
 
-Individual scripts for:
+以下の個別スクリプト:
 
-- GitHub Labels (53 labels across 10 categories)
-- GitHub Wiki (9 documentation pages)
-- GitHub Projects (9 custom fields, 7 views)
-- CI/CD Workflows (5 workflows)
-- Git Hooks (pre-commit quality checks)
-- Project Structure (Clean Architecture)
-- Development Environment (configuration files)
+- GitHubラベル（10カテゴリ、53ラベル）
+- GitHub Wiki（9ドキュメントページ）
+- GitHubプロジェクト（9カスタムフィールド、7ビュー）
+- CI/CDワークフロー（5ワークフロー）
+- Gitフック（プリコミット品質チェック）
+- プロジェクト構造（クリーンアーキテクチャ）
+- 開発環境（設定ファイル）
 
-## 📚 Documentation
+## 📚 ドキュメント
 
-- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**: Comprehensive setup guide
-- **[SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md)**: Quick setup instructions
-- **[github-projects-setup.md](./github-projects-setup.md)**: GitHub Projects configuration
-- **[Engineering Handbook](https://github.com/sera-inc/engineering-handbook)**: Complete development guidelines
+- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**: 包括的なセットアップガイド
+- **[SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md)**: クイックセットアップ手順
+- **[github-projects-setup.md](./github-projects-setup.md)**: GitHubプロジェクト設定
+- **[Engineering Handbook](https://github.com/sera-inc/engineering-handbook)**: 完全な開発ガイドライン
 
-## 🔧 Supported Project Types
+## 🔧 サポートされるプロジェクトタイプ
 
-### Python Projects
+### Pythonプロジェクト
 
-- Package manager: [uv](https://github.com/astral-sh/uv)
-- Linter/Formatter: [Ruff](https://github.com/astral-sh/ruff)
-- Type checker: [Pyright](https://github.com/microsoft/pyright)
-- Test framework: [pytest](https://pytest.org/)
-- Git hooks: [pre-commit](https://pre-commit.com/)
+- パッケージマネージャー: [uv](https://github.com/astral-sh/uv)
+- リンター/フォーマッター: [Ruff](https://github.com/astral-sh/ruff)
+- 型チェッカー: [Pyright](https://github.com/microsoft/pyright)
+- テストフレームワーク: [pytest](https://pytest.org/)
+- Gitフック: [pre-commit](https://pre-commit.com/)
 
-### TypeScript Projects
+### TypeScriptプロジェクト
 
-- Package manager: [pnpm](https://pnpm.io/)
-- Linter/Formatter: [Biome](https://biomejs.dev/)
-- Type checker: [TypeScript](https://www.typescriptlang.org/)
-- Test framework: [Vitest](https://vitest.dev/)
-- Git hooks: [Husky](https://typicode.github.io/husky/)
+- パッケージマネージャー: [pnpm](https://pnpm.io/)
+- リンター/フォーマッター: [Biome](https://biomejs.dev/)
+- 型チェッカー: [TypeScript](https://www.typescriptlang.org/)
+- テストフレームワーク: [Vitest](https://vitest.dev/)
+- Gitフック: [Husky](https://typicode.github.io/husky/)
 
-## 🏗️ Architecture
+## 🏗️ アーキテクチャ
 
-All projects follow Clean Architecture principles:
+すべてのプロジェクトはクリーンアーキテクチャの原則に従います:
 
 ```
 ┌─────────────────────────────────────┐
-│         Infrastructure              │  External interfaces
+│         Infrastructure              │  外部インターフェース
 ├─────────────────────────────────────┤
-│            Adapter                  │  Interface adapters
+│            Adapter                  │  インターフェースアダプター
 ├─────────────────────────────────────┤
-│           Use Case                  │  Business logic
+│           Use Case                  │  ビジネスロジック
 ├─────────────────────────────────────┤
-│            Domain                   │  Core entities
+│            Domain                   │  コアエンティティ
 └─────────────────────────────────────┘
 ```
 
-**Dependency Rule**: Dependencies point inward only.
+**依存関係ルール**: 依存関係は内側のみを向きます。
 
-## 🧪 Quality Standards
+## 🧪 品質基準
 
-### Test Coverage
+### テストカバレッジ
 
-- Unit tests: 80%+ coverage required
-- Integration tests: 60%+ coverage required
-- E2E tests: Critical scenarios
+- ユニットテスト: 80%以上のカバレッジが必要
+- 統合テスト: 60%以上のカバレッジが必要
+- E2Eテスト: 重要なシナリオ
 
-### Code Quality
+### コード品質
 
-- Zero linting errors
-- Zero type checking errors
-- All tests passing
-- Security scans passing
+- リントエラーゼロ
+- 型チェックエラーゼロ
+- すべてのテストが合格
+- セキュリティスキャンが合格
 
-### CI/CD Gates
+### CI/CDゲート
 
-1. **Pre-commit**: Format, lint, type check, unit tests
-2. **PR Creation**: All tests, security scan
-3. **Pre-merge**: All checks must pass
-4. **Pre-deployment**: E2E tests, performance tests
+1. **プリコミット**: フォーマット、リント、型チェック、ユニットテスト
+2. **PR作成**: すべてのテスト、セキュリティスキャン
+3. **マージ前**: すべてのチェックが合格必須
+4. **デプロイ前**: E2Eテスト、パフォーマンステスト
 
-## 🔒 Security
+## 🔒 セキュリティ
 
-- Automated dependency scanning
-- SAST (Static Application Security Testing)
-- Secrets scanning with Gitleaks
-- Security issue template
-- SECURITY.md in all projects
+- 自動依存関係スキャン
+- SAST（静的アプリケーションセキュリティテスト）
+- Gitleaksによるシークレットスキャン
+- セキュリティIssueテンプレート
+- すべてのプロジェクトにSECURITY.md
 
-## 🤝 Contributing
+## 🤝 コントリビューション
 
-See [CONTRIBUTING.md](./templates/common/CONTRIBUTING.md) template for contribution guidelines.
+コントリビューションガイドラインについては[CONTRIBUTING.md](./templates/common/CONTRIBUTING.md)テンプレートを参照してください。
 
-## 📖 Additional Resources
+## 📖 追加リソース
 
 - [Engineering Handbook](https://github.com/sera-inc/engineering-handbook)
-- [Clean Architecture Guide](https://github.com/sera-inc/engineering-handbook/blob/main/docs/05-architecture/clean-architecture.md)
-- [Test Strategy](https://github.com/sera-inc/engineering-handbook/blob/main/docs/03-quality-assurance/test-strategy.md)
-- [Git Workflow](https://github.com/sera-inc/engineering-handbook/blob/main/docs/02-development-process/git-workflow.md)
+- [クリーンアーキテクチャガイド](https://github.com/sera-inc/engineering-handbook/blob/main/docs/05-architecture/clean-architecture.md)
+- [テスト戦略](https://github.com/sera-inc/engineering-handbook/blob/main/docs/03-quality-assurance/test-strategy.md)
+- [Gitワークフロー](https://github.com/sera-inc/engineering-handbook/blob/main/docs/02-development-process/git-workflow.md)
 
-## 🆘 Getting Help
+## 🆘 ヘルプ
 
-1. Check [SETUP_GUIDE.md](./SETUP_GUIDE.md)
-2. Review [Engineering Handbook](https://github.com/sera-inc/engineering-handbook)
-3. Search existing issues
-4. Ask in team Slack
-5. Create an issue
+1. [SETUP_GUIDE.md](./SETUP_GUIDE.md)を確認
+2. [Engineering Handbook](https://github.com/sera-inc/engineering-handbook)をレビュー
+3. 既存のIssueを検索
+4. チームSlackで質問
+5. Issueを作成
 
-## 📄 License
+## 📄 ライセンス
 
-Internal use only - Sera Inc.
+内部使用のみ - Sera Inc.
