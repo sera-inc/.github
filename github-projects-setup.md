@@ -431,3 +431,17 @@ Client:
 - GitHub Actions自動レポート連携
 
 これらの設定により、包括的なプロジェクト管理が可能になります。
+
+## 📚 関連ドキュメント
+
+このガイドは GitHub Projects の技術的な設定手順を説明していますが、より詳細なプロジェクト管理のガイドラインについては、以下のドキュメントを参照してください：
+
+### Engineering Handbook
+- [sera-inc/engineering-handbook](https://github.com/sera-inc/engineering-handbook) - 開発組織全体のプロセスとガイドライン
+- [GitHub プロジェクト管理ドキュメント](https://github.com/sera-inc/engineering-handbook/tree/main/docs/07-github-project-management) - プロジェクト管理の包括的なガイド
+
+### 具体的なトピック
+- [Issue 管理](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/03-issue-management.md) - ラベル体系、Issue テンプレート、ワークフローの詳細
+- [Projects 設定](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/02-projects-setup.md) - カスタムフィールド、ビュー、自動化の運用ガイド
+- [Pull Request プロセス](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/05-pull-request-process.md) - PR テンプレート、レビュープロセス、マージ戦略
+- [自動化ワークフロー](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/README.md#07-自動化ワークフロー) - GitHub Actions による自動化の詳細

@@ -3,6 +3,8 @@
 ## 概要
 この手順書は、sera-inc/.github リポジトリのセットアップと使用方法を記載しています。
 
+このリポジトリは、sera-inc 組織全体で使用される GitHub テンプレート、ワークフロー、セットアップスクリプトを提供します。より詳細なプロジェクト管理のガイドラインについては、[sera-inc/engineering-handbook](https://github.com/sera-inc/engineering-handbook) の [GitHub プロジェクト管理ドキュメント](https://github.com/sera-inc/engineering-handbook/tree/main/docs/07-github-project-management) を参照してください。
+
 ## 前提条件
 - GitHub Personal Access Token (classic) が必要
 - リポジトリへの管理者権限が必要
@@ -11,7 +13,7 @@
 
 ### 1. リポジトリのクローン
 ```bash
-git clone https://github.com/Japan-AISI/aisev.git
+git clone https://github.com/sera-inc/.github.git
 ```
 
 ### 2. 環境変数の設定
@@ -89,6 +91,13 @@ chmod +x setup-github-wiki.sh
 - 2024-09-25: 初版作成
 - セットアップスクリプトとテンプレート追加
 - ワークフロー統合
+
+## 関連ドキュメント
+- [sera-inc/engineering-handbook](https://github.com/sera-inc/engineering-handbook) - 開発組織全体のプロセスとガイドライン
+- [GitHub プロジェクト管理ドキュメント](https://github.com/sera-inc/engineering-handbook/tree/main/docs/07-github-project-management) - 詳細なプロジェクト管理手順
+  - [Issue 管理](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/03-issue-management.md) - ラベル体系と Issue テンプレートの詳細
+  - [Projects 設定](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/02-projects-setup.md) - カスタムフィールドとビューの詳細
+  - [Pull Request プロセス](https://github.com/sera-inc/engineering-handbook/blob/main/docs/07-github-project-management/05-pull-request-process.md) - PR テンプレートとレビュープロセス
 
 ## 連絡先
 質問や問題がある場合は、sera-inc 開発チームまでお問い合わせください。
