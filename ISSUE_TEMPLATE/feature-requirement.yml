@@ -1,21 +1,38 @@
 name: 🚀 機能要件
-description: 新機能・改修要件の定義
+description: 新機能・改修要件の定義（統合型プロジェクト管理対応）
 title: "[要件] "
 labels: ["requirement", "feature"]
-projects: ["sera-inc/1"]
+projects: []
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
         ## 📋 機能要件テンプレート
-        統合型プロジェクト管理のための標準化された機能要件定義フォームです。
         
+        このテンプレートは、機能要件を構造化して定義し、実装・テスト・レビューの各フェーズで一貫性を保つための標準フォーマットです。
+        
+        ### 📖 使い方
+        1. **基本情報**: 優先度、コンポーネント、見積もりを設定
+        2. **詳細説明**: 背景・目的、機能概要、実装根拠を記載
+        3. **受け入れ基準**: 完了条件を明確化
+        4. **セキュリティ**: 必要な考慮事項を記載
+        
+  - type: input
+    id: requirement-id
+    attributes:
+      label: 🆔 要件ID
+      placeholder: "例: AUTH-001, DATA-002, SEC-003"
+      description: "プロジェクト固有の要件識別子（カテゴリ-連番形式を推奨）"
+    validations:
+      required: true
+      
   - type: input
     id: function-name
     attributes:
       label: 📝 機能名
       placeholder: "例: ユーザー認証機能の実装"
+      description: "機能の簡潔な名称"
     validations:
       required: true
       
@@ -45,6 +62,9 @@ body:
         - "Infrastructure"
         - "UI/UX"
         - "Security"
+        - "Quality/Foundation"
+        - "Data Processing"
+        - "Operations"
         - "Documentation"
     validations:
       required: true
@@ -53,7 +73,7 @@ body:
     id: story-points
     attributes:
       label: ⚡ ストーリーポイント
-      description: 実装複雑度の見積もり
+      description: 実装複雑度の見積もり（フィボナッチ数列）
       options:
         - "1"
         - "2" 
@@ -63,6 +83,8 @@ body:
         - "13"
         - "21"
         - "34"
+    validations:
+      required: true
       
   - type: dropdown
     id: client-priority
@@ -78,47 +100,99 @@ body:
       required: true
       
   - type: input
+    id: estimated-hours
+    attributes:
+      label: ⏱️ 見積工数
+      placeholder: "16"
+      description: "時間単位での見積もり"
+    validations:
+      required: true
+      
+  - type: input
+    id: sprint
+    attributes:
+      label: 📅 スプリント
+      placeholder: "Sprint-1"
+      description: "実装予定のスプリント（Sprint-1, Sprint-2, Backlog, 継続など）"
+      
+  - type: input
+    id: start-date
+    attributes:
+      label: 📆 開始時期
+      placeholder: "2024-12-01"
+      description: "実装開始予定日（YYYY-MM-DD形式）"
+      
+  - type: input
+    id: end-date
+    attributes:
+      label: 📆 終了時期
+      placeholder: "2024-12-05"
+      description: "実装完了予定日（YYYY-MM-DD形式）"
+      
+  - type: input
     id: figma-link
     attributes:
       label: 🎨 Figmaリンク
       placeholder: "https://figma.com/file/..."
       description: "UI/UX関連の場合は必須"
       
-  - type: input
-    id: estimated-hours
+  - type: textarea
+    id: background-purpose
     attributes:
-      label: ⏱️ 見積工数
-      placeholder: "16"
-      description: "時間単位での見積もり"
-      
-  - type: input
-    id: delivery-date
-    attributes:
-      label: 📅 希望納期
-      placeholder: "2024-12-31"
-      description: "YYYY-MM-DD形式"
+      label: 🎯 背景・目的
+      placeholder: |
+        なぜこの機能が必要なのか、どのような課題を解決するのかを記載してください。
+        
+        例:
+        - 現状の課題: ユーザーが毎回ログインする必要があり、UXが悪い
+        - 解決したいこと: セッション管理により、ユーザー体験を向上させる
+        - ビジネス価値: ユーザー離脱率を20%削減
+      description: "機能の必要性とビジネス価値"
+    validations:
+      required: true
       
   - type: textarea
-    id: description
+    id: function-overview
     attributes:
-      label: 📖 機能詳細説明
+      label: 💡 機能概要
       placeholder: |
-        ## 背景・目的
-        なぜこの機能が必要なのか
+        実装する機能の概要を記載してください。
         
-        ## 機能概要
-        どのような機能なのか
+        例:
+        - JWT トークンベースの認証システム
+        - リフレッシュトークンによる自動更新
+        - セキュアなトークン保存（HttpOnly Cookie）
+      description: "どのような機能なのか"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: implementation-rationale
+    attributes:
+      label: 📊 実装根拠
+      placeholder: |
+        優先度、工数、ストーリーポイントの根拠を記載してください。
         
-        ## 実装要件
-        - 技術的な要求事項
-        - パフォーマンス要件
-        - セキュリティ要件
+        例:
+        【High理由】ユーザー体験に直結し、離脱率削減に必須
+        【工数16H】JWT実装8H + テスト5H + ドキュメント3H
+        【SP=5】標準的な実装だが、セキュリティ考慮が必要
+      description: "見積もりと優先度の理由"
+      
+  - type: textarea
+    id: technical-requirements
+    attributes:
+      label: 🔧 実装要件
+      placeholder: |
+        - **技術的要求事項**: 使用する技術スタック、ライブラリ、フレームワーク
+        - **パフォーマンス要件**: レスポンス時間、スループット、リソース制約
+        - **品質要件**: テストカバレッジ、コード品質基準
+        - **スケジュール要件**: マイルストーン、依存関係
       value: |
-        ## 背景・目的
-        
-        ## 機能概要
-        
-        ## 実装要件
+        - **技術的要求事項**: 
+        - **パフォーマンス要件**: 
+        - **品質要件**: 
+        - **スケジュール要件**: 
     validations:
       required: true
       
@@ -127,10 +201,13 @@ body:
     attributes:
       label: ✅ 受け入れ基準
       placeholder: |
-        - [ ] 条件1が満たされている
-        - [ ] 条件2が満たされている
-        - [ ] テストが通過している
-      description: "この機能が完了したと判断する基準"
+        - [ ] 機能が仕様通りに実装されている
+        - [ ] ユニットテストが実装され、カバレッジ80%以上を達成している
+        - [ ] 統合テストが実装され、主要なシナリオをカバーしている
+        - [ ] ドキュメントが更新されている
+        - [ ] コードレビューが完了している
+        - [ ] セキュリティレビューが完了している（該当する場合）
+      description: "この機能が完了したと判断する基準（チェックリスト形式）"
     validations:
       required: true
       
@@ -139,13 +216,57 @@ body:
     attributes:
       label: 🛡️ セキュリティ考慮事項
       placeholder: |
-        - 認証・認可要件
-        - データ保護要件
-        - 脆弱性対策
-      description: "セキュリティ関連の考慮事項"
+        - 入力値の適切なバリデーション
+        - 出力データのサニタイズ
+        - 認証・認可の適切な実装
+        - ログ記録とモニタリング
+        - データ暗号化（保存時・転送時）
+        - OWASP Top 10 対策
+      description: "セキュリティ関連の考慮事項（該当する場合は必須）"
+      
+  - type: textarea
+    id: related-context
+    attributes:
+      label: 📚 関連情報・背景資料
+      placeholder: |
+        - 関連する技術ドキュメント
+        - 参考実装
+        - 外部API仕様
+        - 設計資料
+      description: "実装に役立つ追加情報や参考資料"
       
   - type: textarea
     id: additional-notes
     attributes:
       label: 📝 追加情報
-      placeholder: "その他の特記事項、制約、参考資料など"
+      placeholder: |
+        - 制約事項
+        - 既知の問題
+        - 将来の拡張計画
+        - その他の特記事項
+      description: "その他の重要な情報"
+      
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📌 テンプレート使用のヒント
+        
+        ### 優先度の判断基準
+        - **Critical**: システム停止、セキュリティ重大問題、法的要件
+        - **High**: ビジネス影響大、ユーザー体験に直結
+        - **Medium**: 重要だが緊急性は低い
+        - **Low**: あると良い機能、将来的な改善
+        
+        ### ストーリーポイントの目安
+        - **1-2**: 数時間で完了する単純な変更
+        - **3-5**: 1-2日で完了する標準的な機能
+        - **8-13**: 3-5日かかる複雑な機能
+        - **21+**: 1週間以上かかる大規模な機能（分割を検討）
+        
+        ### 受け入れ基準のポイント
+        - 具体的で測定可能な条件を記載
+        - チェックリスト形式で明確化
+        - テスト完了条件を含める
+        - ドキュメント更新を忘れずに
