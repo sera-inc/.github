@@ -15,6 +15,7 @@ The initialization system automatically sets up:
 5. **GitHub Labels**: Complete label taxonomy for issue and PR management
 6. **GitHub Wiki**: Pre-populated documentation structure
 7. **GitHub Projects**: Project board with custom fields and views
+8. **AI Code Review Tools**: CodeRabbit and Cursor Bugbot for automated code reviews in Japanese
 
 ## 🚀 Quick Start
 
@@ -231,6 +232,81 @@ Edit `.github/workflows/deploy-*.yml` files to add your deployment commands:
     docker push my-app:${{ github.sha }}
     kubectl set image deployment/my-app my-app=my-app:${{ github.sha }}
 ```
+
+### Step 8: Setup AI Code Review Tools
+
+Sera Inc. uses AI-powered code review tools to enhance code quality and provide immediate feedback on pull requests.
+
+#### CodeRabbit Setup
+
+1. **Install CodeRabbit GitHub App**:
+   - Visit [CodeRabbit GitHub App](https://github.com/apps/coderabbitai)
+   - Click "Install"
+   - Select sera-inc organization
+   - Choose "All repositories" or select specific repositories
+   - Click "Install"
+
+2. **Add Configuration File**:
+   Create `.coderabbit.yaml` in the repository root:
+   ```yaml
+   language: ja-JP
+   reviews:
+     profile: chill
+     request_changes_workflow: false
+     high_level_summary: true
+     poem: false
+     review_status: true
+     collapse_walkthrough: false
+     auto_review:
+       enabled: true
+       drafts: false
+   chat:
+     auto_reply: true
+   ```
+
+3. **Test the Setup**:
+   - Create a new PR
+   - CodeRabbit will automatically review the code in Japanese
+   - Verify that review comments appear on the PR
+
+#### Cursor Bugbot Setup
+
+1. **Enable Cursor Bugbot**:
+   - Open Cursor editor
+   - Go to Settings (⌘+,) → Features → Bugbot
+   - Enable "Bugbot"
+   - Visit [Cursor Bugbot Dashboard](https://cursor.com/settings)
+   - Click "Install GitHub App"
+   - Select sera-inc organization
+   - Choose repositories to enable
+   - Click "Install"
+
+2. **Add Configuration File**:
+   Create `.cursor/BUGBOT.md` in the repository:
+   ```markdown
+   # Bugbot Configuration
+
+   ## Language
+   日本語でレビューとコメントを提供してください。
+
+   ## Project Overview
+   [プロジェクトの簡単な説明を記載]
+
+   ## Review Guidelines
+   - 日本語で建設的なフィードバックを提供
+   - 重大な問題と潜在的なバグに焦点を当てる
+   - コード品質の改善を提案
+   - 一般的なセキュリティ脆弱性をチェック
+   - 適切なエラーハンドリングを確認
+   ```
+
+3. **Enable Repository**:
+   - Go to [Cursor Bugbot Dashboard](https://cursor.com/settings)
+   - Select the repository
+   - Click "Enable"
+
+For detailed documentation, see:
+- [AI Code Review Tools Guide](https://github.com/sera-inc/engineering-handbook/blob/main/docs/02-development-process/ai-code-review-tools.md)
 
 ## 🔧 Individual Setup Scripts
 
@@ -541,6 +617,7 @@ pnpm add -D @types/<package>
 - [Test Strategy](https://github.com/sera-inc/engineering-handbook/blob/main/docs/03-quality-assurance/test-strategy.md)
 - [Git Workflow](https://github.com/sera-inc/engineering-handbook/blob/main/docs/02-development-process/git-workflow.md)
 - [Code Review Guidelines](https://github.com/sera-inc/engineering-handbook/blob/main/docs/02-development-process/code-review.md)
+- [AI Code Review Tools](https://github.com/sera-inc/engineering-handbook/blob/main/docs/02-development-process/ai-code-review-tools.md)
 
 ## 🆘 Getting Help
 
