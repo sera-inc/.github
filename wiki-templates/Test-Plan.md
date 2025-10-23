@@ -4,7 +4,11 @@
 
 This document describes the testing strategy for PROJECT_NAME, including test types, coverage requirements, and testing procedures.
 
-> **Test Case Management**: For detailed test case documentation and execution tracking, use the [Test Case Template (Excel)](./test-case-template.xlsx). This template includes structured fields for test item ID, functional requirement ID, test procedures, expected results, and more.
+> **Test Case Management**: For detailed test case documentation and execution tracking, use one of the following templates:
+> - **Local**: [test-case-template.xlsx](./test-case-template.xlsx)
+> - **Online**: [Google Sheets version](https://docs.google.com/spreadsheets/d/1PquS0YWC_r1TyrKVpJ_l2-TEIVzk-lJw/edit?gid=1858056975#gid=1858056975)
+> 
+> These templates include structured fields for test item ID, functional requirement ID, test procedures, expected results, and more.
 
 ## Test Pyramid
 
@@ -191,7 +195,11 @@ test('user registration flow', async ({ page }) => {
 
 ### Test Case Template (Excel)
 
-For structured test case management, use the [test-case-template.xlsx](./test-case-template.xlsx) which includes:
+For structured test case management, use one of the following templates:
+- **Local**: [test-case-template.xlsx](./test-case-template.xlsx)
+- **Online**: [Google Sheets version](https://docs.google.com/spreadsheets/d/1PquS0YWC_r1TyrKVpJ_l2-TEIVzk-lJw/edit?gid=1858056975#gid=1858056975)
+
+These templates include:
 
 **Required Fields**:
 - **Test Item ID**: Unique identifier (e.g., TC-001, TC-002)
