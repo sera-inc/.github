@@ -4,6 +4,8 @@
 
 This document describes the testing strategy for PROJECT_NAME, including test types, coverage requirements, and testing procedures.
 
+> **Test Case Management**: For detailed test case documentation and execution tracking, use the [Test Case Template (Excel)](./test-case-template.xlsx). This template includes structured fields for test item ID, functional requirement ID, test procedures, expected results, and more.
+
 ## Test Pyramid
 
 ```
@@ -184,6 +186,36 @@ test('user registration flow', async ({ page }) => {
 - Throughput (requests/second)
 - Error rate
 - Resource utilization (CPU, memory)
+
+## Test Case Documentation
+
+### Test Case Template (Excel)
+
+For structured test case management, use the [test-case-template.xlsx](./test-case-template.xlsx) which includes:
+
+**Required Fields**:
+- **Test Item ID**: Unique identifier (e.g., TC-001, TC-002)
+- **Functional Requirement ID**: Links to requirement documentation (e.g., FR-001)
+- **Major Category**: High-level functional area (e.g., Login Function, Data Management)
+- **Minor Category**: Specific test category (e.g., Normal Login, Error Login)
+- **Test Item Name**: Clear description of what is being tested
+- **Test Perspective**: Normal case, error case, boundary value, performance, etc.
+- **Preconditions**: System state and data requirements before test
+- **Test Procedure**: Numbered steps to execute the test
+- **Input Data**: Specific test data to use
+- **Expected Result (Acceptance Criteria)**: Clear, measurable success criteria
+- **Actual Result**: Recorded during test execution
+- **Judgment**: Pass / Fail / Pending / Not Executed
+- **Priority**: High / Medium / Low
+- **Test Executor**: Name of person executing the test
+- **Test Execution Date**: Date in YYYY/MM/DD format
+- **Notes**: Additional information, constraints, bug IDs
+
+**Acceptance Criteria Guidelines**:
+1. **Measurable**: Use specific outcomes (e.g., "Dashboard screen is displayed" not "Works correctly")
+2. **Clear**: Avoid ambiguity - anyone should interpret the same way
+3. **Complete**: Include all expected results without omissions
+4. **Verifiable**: Only include what can be actually tested
 
 ## Test Organization
 

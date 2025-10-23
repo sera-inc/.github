@@ -67,6 +67,7 @@ cd .github
 │   ├── typescript/              # TypeScriptプロジェクトテンプレート
 │   └── common/                  # 共通テンプレート
 ├── wiki-templates/               # Wikiページテンプレート
+│   └── test-case-template.xlsx  # テストケース管理テンプレート
 ├── workflows-templates/          # CI/CDワークフローテンプレート
 ├── ISSUE_TEMPLATE/              # Issueテンプレート
 ├── workflows/                    # 組織ワークフロー
@@ -168,6 +169,10 @@ cd .github
 - ユニットテスト: 80%以上のカバレッジが必要
 - 統合テスト: 60%以上のカバレッジが必要
 - E2Eテスト: 重要なシナリオ
+
+### テストケース管理
+
+テストケースの実施・管理には [test-case-template.xlsx](./wiki-templates/test-case-template.xlsx) を使用してください。このテンプレートには、テスト項目ID、機能要件ID、テスト手順、期待結果などの必須項目が含まれています。
 
 ### コード品質
 
