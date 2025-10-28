@@ -1,0 +1,14 @@
+# Labeler configuration for sera-inc/.github repository
+# This file configures automatic PR labeling based on changed file paths
+# For more information, see: https://github.com/actions/labeler
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: '**/*.md'
+    - any-glob-to-any-file: 'ISSUE_TEMPLATE/**'
+
+enhancement:
+  - changed-files:
+    - any-glob-to-any-file: 'ISSUE_TEMPLATE/**'
+    - any-glob-to-any-file: 'PULL_REQUEST_TEMPLATE/**'
+    - any-glob-to-any-file: 'workflow-templates/**'
