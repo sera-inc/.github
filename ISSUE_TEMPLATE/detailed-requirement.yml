@@ -1,0 +1,501 @@
+name: 📋 詳細機能要件
+description: 詳細な機能要件定義テンプレート（issue #16フォーマット準拠）
+title: "[要件] "
+labels: ["requirement", "feature"]
+projects: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📋 詳細機能要件テンプレート
+        
+        このテンプレートは、issue #16のフォーマットに準拠した詳細な機能要件定義用です。
+        背景・目的、詳細要件、受け入れ基準、テスト設計、セキュリティ考慮事項、データモデルを含む包括的な要件定義を行います。
+        
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🔥 優先度
+      description: ビジネス影響度に基づく優先度
+      options:
+        - "Critical"
+        - "High" 
+        - "Medium"
+        - "Low"
+        - "TBD"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🏗️ コンポーネント
+      description: 影響するシステム領域（複数選択可能な場合はカンマ区切り）
+      options:
+        - "Frontend"
+        - "Backend"
+        - "Database" 
+        - "Infrastructure"
+        - "AI/ML"
+        - "UI/UX"
+        - "Security"
+        - "Documentation"
+        - "Data Processing"
+        - "Operations"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: story-points
+    attributes:
+      label: ⚡ ストーリーポイント
+      description: 実装複雑度の見積もり（フィボナッチ数列）
+      options:
+        - "1"
+        - "2" 
+        - "3"
+        - "5"
+        - "8"
+        - "13"
+        - "21"
+        - "34"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: client-priority
+    attributes:
+      label: 👔 クライアント優先度
+      description: MoSCoW法による分類
+      options:
+        - "Must Have"
+        - "Should Have"
+        - "Could Have" 
+        - "Won't Have"
+    validations:
+      required: true
+      
+  - type: input
+    id: estimated-hours
+    attributes:
+      label: ⏱️ 見積もり工数
+      placeholder: "60時間"
+      description: "時間単位での見積もり"
+    validations:
+      required: true
+      
+  - type: input
+    id: delivery-date
+    attributes:
+      label: 📅 希望納期
+      placeholder: "Phase 1 / Sprint-1 / 2024-12-31"
+      description: "実装完了希望日"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📌 背景・目的
+        
+  - type: textarea
+    id: evidence
+    attributes:
+      label: エビデンス
+      placeholder: |
+        - **提供資料**: 不動産調査チェックリスト
+        - **該当箇所**: L5-L14（登記内容の理解セクション）
+        - **ミーティング記録**: https://example.com/meeting/xxx
+      description: "要件の根拠となる資料や参照箇所"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景
+      placeholder: |
+        現状の課題や問題点を記載してください。
+        
+        例:
+        - 現在は手動で確認しており、見落としや誤判断のリスクがある
+        - 処理に時間がかかり、業務効率が悪い
+        - データの一貫性が保たれていない
+      description: "なぜこの機能が必要なのか"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      placeholder: |
+        この機能で達成したいことを記載してください。
+        
+        例:
+        - 自動的に重要な法的リスク要因を検知することで、正確性を向上させる
+        - 作業時間を短縮し、業務効率を改善する
+        - データの一貫性を保ち、品質を向上させる
+      description: "この機能で何を達成するのか"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📚 参考・エビデンス
+        
+  - type: textarea
+    id: checklist-reference
+    attributes:
+      label: チェックリスト参照
+      placeholder: |
+        **参照**: [チェックリスト名](https://github.com/org/repo/blob/main/docs/checklist.md)
+        
+        チェックリストの該当箇所については、以下の詳細要件セクション内の「チェックリスト引用」をご参照ください。
+      description: "参照するチェックリストやドキュメント"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 🎯 機能概要
+        
+  - type: textarea
+    id: function-overview
+    attributes:
+      label: 機能概要
+      placeholder: |
+        機能の概要を1-2文で簡潔に記載してください。
+        
+        例:
+        登記事項証明書（PDF/テキスト）を取り込み、OCR処理と構造化解析により、法的リスク要因を自動検知してフラグ付けする機能。
+      description: "機能の簡潔な説明"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📝 詳細要件
+        
+  - type: textarea
+    id: detailed-requirements
+    attributes:
+      label: 詳細要件
+      placeholder: |
+        ### 1. 機能名1
+        - **入力形式**: PDF（画像/テキスト）、テキストファイル
+        - **対応書類**: 登記事項証明書（全部事項証明書）
+        - **アップロード方法**: ドラッグ&ドロップ、ファイル選択
+        - **ファイルサイズ制限**: 最大10MB
+        
+        ### 2. 機能名2
+        - **対象**: PDF画像形式の登記簿
+        - **処理エンジン**: Google Gemini API（既存実装活用）
+        - **抽出対象**:
+          - 表題部（土地/建物）
+          - 甲区（所有権に関する事項）
+          - 乙区（所有権以外の権利に関する事項）
+        - **エラーハンドリング**: OCR失敗時は手動入力モードに切り替え
+        
+        ### 3. 自動チェック機能
+        
+        #### 3.1 チェック項目1 (L8)
+        - **検出条件**: 建物が登記されていない場合
+        - **フラグ**: has_unregistered_building = true
+        - **推奨アクション**: 「未登記建物あり」特約の追加提案
+        
+        #### 3.2 チェック項目2 (L9)
+        - **検出条件**: 長屋の登記形態を判定
+        - **フラグ**: row_house_type = "単独登記" | "区分登記"
+        - **推奨アクション**: 区分登記の場合、管理規約の確認提案
+        
+        ### 4. データ出力機能
+        - **出力形式**: 構造化JSON
+        - **出力項目**:
+          - 各チェック項目のフラグ（boolean）
+          - 検出された具体的な記載内容（テキスト）
+          - 推奨アクション（配列）
+          - 信頼度スコア（0-100）
+        
+        ### 5. UI表示機能
+        - **処理進捗表示**: Issue #11と連携
+          - ステップ1: 登記簿PDFアップロード完了
+          - ステップ2: OCR処理中（甲区・乙区・表題部）
+          - ステップ3: OCR完了・テキスト抽出成功
+        - **結果表示**: フラグ一覧と推奨アクションの表示
+        - **エラー表示**: OCR失敗、パース失敗時のメッセージ
+      description: "機能の詳細な仕様"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## ✅ 受け入れ基準
+        
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: 受け入れ基準
+      placeholder: |
+        ### 機能要件
+        - [ ] 機能1が実装されている
+        - [ ] 機能2が実装されている
+        - [ ] 機能3が実装されている
+        - [ ] エラーハンドリングが適切に実装されている
+        
+        ### 非機能要件
+        - [ ] 処理時間: 1件あたり30秒以内
+        - [ ] OCR精度: 95%以上（テキスト抽出）
+        - [ ] 検出精度: 90%以上（各チェック項目）
+        - [ ] エラーハンドリング: 全エラーケースで適切なメッセージ表示
+        
+        ### 統合要件
+        - [ ] Issue #2（テンプレート管理）とフラグ連携
+        - [ ] Issue #10（特約管理）と推奨アクション連携
+        - [ ] Issue #11（処理進捗）と進捗表示連携
+      description: "この機能が完了したと判断する基準"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 🧪 テスト設計
+        
+  - type: textarea
+    id: test-design
+    attributes:
+      label: テスト設計
+      placeholder: |
+        ### 1. 単体テスト
+        
+        #### 1.1 機能1テスト
+        - **テストケース1**: テキストPDFの正常処理
+          - 入力: テキスト形式のPDF
+          - 期待結果: テキストが正しく抽出される
+        - **テストケース2**: 画像PDFの正常処理
+          - 入力: 画像形式のPDF
+          - 期待結果: OCR処理後、テキストが抽出される
+        - **テストケース3**: OCR失敗ケース
+          - 入力: 低解像度・不鮮明な画像PDF
+          - 期待結果: エラーメッセージ表示、手動入力モード提案
+        
+        #### 1.2 機能2テスト
+        - **テストケース1**: 正常系
+          - 入力: 標準的なデータ
+          - 期待結果: フラグが正しく設定される
+        - **テストケース2**: 異常系
+          - 入力: 不正なデータ
+          - 期待結果: エラーメッセージ表示
+        
+        ### 2. 統合テスト
+        
+        #### 2.1 エンドツーエンドテスト
+        - **テストケース1**: 正常系フルフロー
+          - 入力: 複数リスク要因を含むPDF
+          - 期待結果: 全フラグが正しく設定され、推奨アクションが生成される
+        - **テストケース2**: リスクなしケース
+          - 入力: リスク要因なしのPDF
+          - 期待結果: 全フラグ = false、推奨アクションなし
+        
+        #### 2.2 Issue #X連携テスト
+        - **テストケース**: フラグによる分岐
+          - 前提: フラグ = true
+          - 期待結果: 適切な処理が実行される
+        
+        ### 3. パフォーマンステスト
+        - **テストケース1**: 処理時間測定
+          - 入力: 標準的なPDF（5ページ）
+          - 期待結果: 30秒以内に処理完了
+        - **テストケース2**: 大容量ファイル
+          - 入力: 10MBのPDF
+          - 期待結果: タイムアウトせず処理完了またはエラー表示
+        
+        ### 4. セキュリティテスト
+        - **テストケース1**: PII保護
+          - 確認項目: 個人情報（氏名、住所）がログに出力されない
+        - **テストケース2**: ファイル検証
+          - 入力: 悪意のあるファイル（実行ファイル等）
+          - 期待結果: アップロード拒否
+      description: "単体テスト、統合テスト、パフォーマンステスト、セキュリティテストの設計"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 🔒 セキュリティ考慮事項
+        
+  - type: textarea
+    id: security-considerations
+    attributes:
+      label: セキュリティ考慮事項
+      placeholder: |
+        1. **個人情報保護**
+           - 登記簿に含まれる氏名、住所等のPIIをマスキング
+           - ログ出力時のPII除外
+           - データ保存時の暗号化
+        
+        2. **ファイル検証**
+           - アップロードファイルの形式検証
+           - ファイルサイズ制限（10MB）
+           - ウイルススキャン（オプション）
+        
+        3. **監査ログ**
+           - 操作履歴の記録
+           - 自動検出結果の記録
+           - ユーザーによる承認/却下の記録
+      description: "セキュリティ関連の考慮事項"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📊 データモデル
+        
+  - type: textarea
+    id: data-model
+    attributes:
+      label: データモデル
+      placeholder: |
+        ### EntityName
+        ```typescript
+        interface EntityName {
+          id: string;
+          propertyId: string;
+          uploadedAt: Date;
+          fileUrl: string;
+          fileType: 'pdf' | 'text';
+          status: 'pending' | 'processing' | 'completed' | 'failed';
+          result?: {
+            field1: string;
+            field2: number;
+            confidence: number;
+          };
+          checks: ChecksInterface;
+          recommendations: Recommendation[];
+        }
+        
+        interface ChecksInterface {
+          flag1: boolean;
+          flag2: boolean;
+          flag3: string | null;
+        }
+        
+        interface Recommendation {
+          type: 'special_term' | 'warning' | 'confirmation';
+          title: string;
+          description: string;
+          priority: 'high' | 'medium' | 'low';
+          status: 'pending' | 'accepted' | 'rejected';
+        }
+        ```
+      description: "データ構造の定義（TypeScript interfaceなど）"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 🔗 関連Issue
+        
+  - type: textarea
+    id: related-issues
+    attributes:
+      label: 関連Issue
+      placeholder: |
+        - Issue #2: 市区町村・都道府県別テンプレート管理（フラグ利用先）
+        - Issue #10: 特約の追加・削除管理（推奨アクション連携）
+        - Issue #11: 処理進捗の表示（OCR/解析進捗表示）
+        - Issue #12: データ保存・読み込み（フラグ永続化）
+        - Issue #15: 統計・分析（登記チェックメトリクス）
+      description: "関連するIssueとその連携内容"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📝 追加ノート
+        
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: 追加ノート
+      placeholder: |
+        ### 実装方針
+        1. **段階的実装**: テキストベースサンプルから開始、OCRは後続フェーズ
+        2. **フィーチャーフラグ**: OCR機能をフィーチャーフラグで制御
+        3. **テストデータ**: マスキング済みサンプルデータを用意
+        4. **エラーハンドリング**: 全エラーケースで適切なフォールバック
+        
+        ### 技術スタック
+        - **OCR**: Google Gemini API（既存実装活用）
+        - **パース**: 正規表現 + ルールベース解析
+        - **ストレージ**: 既存データベース拡張
+        
+        ### 参考資料
+        - 関連法律・規制
+        - 技術ドキュメント
+        - 参考実装
+      description: "実装方針、技術スタック、参考資料など"
+
+  - type: textarea
+    id: devin-info
+    attributes:
+      label: Devin実行情報
+      placeholder: |
+        **Link to Devin run**: https://app.devin.ai/sessions/xxx  
+        **Requested by**: name@example.com / @github-username
+      description: "Devinで作成した場合の実行情報"
+
+  - type: textarea
+    id: change-history
+    attributes:
+      label: 📝 変更履歴
+      placeholder: |
+        - **2024-12-01**: 初回作成
+        - **2024-12-05**: セキュリティ考慮事項を追加
+      description: "このIssueの変更履歴"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## 📌 テンプレート使用のヒント
+        
+        ### 優先度の判断基準
+        - **Critical**: システム停止、セキュリティ重大問題、法的要件
+        - **High**: ビジネス影響大、ユーザー体験に直結
+        - **Medium**: 重要だが緊急性は低い
+        - **Low**: あると良い機能、将来的な改善
+        
+        ### ストーリーポイントの目安
+        - **1-2**: 数時間で完了する単純な変更
+        - **3-5**: 1-2日で完了する標準的な機能
+        - **8-13**: 3-5日かかる複雑な機能
+        - **21+**: 1週間以上かかる大規模な機能（分割を検討）
+        
+        ### テスト設計のポイント
+        - 単体テスト、統合テスト、パフォーマンステスト、セキュリティテストを網羅
+        - 正常系と異常系の両方をカバー
+        - 具体的な入力と期待結果を明記

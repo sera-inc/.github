@@ -26,6 +26,8 @@ permissions:
 jobs:
   dependency-review:
     runs-on: ubuntu-latest
+    # Skip for .github repository as it doesn't have dependency graph enabled
+    if: github.repository != 'sera-inc/.github'
     steps:
       - name: 'Checkout repository'
         uses: actions/checkout@v4
